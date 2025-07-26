@@ -1,0 +1,219 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark {
+      background-color: #333;
+      color: #fff;
+    }
+    body.blue {
+      background-color: #e6f3ff;
+      color: #333;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in;
+    }
+    body.dark .container {
+      background: #444;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+    body.blue .container {
+      background: #f0f8ff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input[type="file"], input[type="number"], input[type="text"], select {
+      margin: 10px 0;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      width: calc(100% - 18px);
+      transition: border-color 0.3s;
+    }
+    input:invalid {
+      border-color: red;
+    }
+    input.valid {
+      animation: validFlash 0.5s;
+    }
+    input.invalid {
+      animation: invalidFlash 0.5s;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+    button:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+      transform: none;
+    }
+    #previewContainer {
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+    #previewTable {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 4px;
+    }
+    body.dark #previewTable {
+      background: #555;
+    }
+    body.blue #previewTable {
+      background: #e6f3ff;
+    }
+    #previewTable th, #previewTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
+    #previewTable tr:hover {
+      background-color: #f1f1f1;
+    }
+    body.dark #previewTable tr:hover {
+      background-color: #666;
+    }
+    body.blue #previewTable tr:hover {
+      background-color: #d1e7ff;
+    }
+    body.dark #previewTable th, body.dark #previewTable td {
+      border-color: #666;
+    }
+    body.blue #previewTable th, body.blue #previewTable td {
+      border-color: #b3d4fc;
+    }
+    #previewTable th {
+      background: #f8f9fa;
+    }
+    body.dark #previewTable th {
+      background: #666;
+    }
+    body.blue #previewTable th {
+      background: #b3d4fc;
+    }
+    .file-icon {
+      max-width: 50px;
+      vertical-align: middle;
+    }
+    #qrCode {
+      margin: 20px 0;
+      animation: slideIn 0.5s ease-in;
+    }
+    #status, #connectionStatus, #transferHistory, #bandwidth, #analytics, #checksumStatus, #debugPanel {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+    #fileList, #transferHistory, #debugPanel {
+      margin: 10px 0;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    #fileList div, #transferHistory div, #debugPanel div {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+    body.dark #fileList div, body.dark #transferHistory div, body.dark #debugPanel div {
+      border-bottom: 1px solid #666;
+    }
+    body.blue #fileList div, body.blue #transferHistory div, body.blue #debugPanel div {
+      border-bottom: 1px solid #b3d4fc;
+    }
+    #progress {
+      width: 100%;
+      height: 20px;
+      margin: 10px 0;
+      display: none;
+      border-radius: 4px;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #007bff;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes uploadPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    @keyframes validFlash {
+      0% { border-color: green; }
+      50% { border-color: #00ff00; }
+      100% { border-color: green; }
+    }
+    @keyframes invalidFlash {
+      0% { border-color: red; }
+      50% { border-color: #ff4444; }
+      100% { border-color: red; }
+    }
+    .uploading {
+      animation: uploadPulse 1.5s infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+      button, input, select {
+        width: 100%;
+        margin: 5px 0;
+      }
+      #previewTable th, #previewTable td {
+        font-size: 14px;
+        padding: 4px;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 900px) {
+      .container {
+        max-width: 90%;
+      }
+    }
+  

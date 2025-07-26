@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ab.css">
+  <title>File Sharing App</title>
+
+</head>
+<body>
+  <div class="container">
+    <h1>File Sharing App</h1>
+    <label for="themeSelect" aria-label="Select theme">Theme:</label>
+    <select id="themeSelect" onchange="changeTheme()" aria-label="Theme selector">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="blue">Blue</option>
+    </select>
+    <label for="sessionPin" aria-label="Session PIN (4-6 alphanumeric characters)">Session PIN (4-6 characters):</label>
+    <input type="text" id="sessionPin" placeholder="Enter or set PIN" pattern="[A-Za-z0-9]{4,6}" required aria-required="true">
+    <label for="sizeLimit" aria-label="Maximum file size in MB">Max File Size (MB):</label>
+    <input type="number" id="sizeLimit" value="100" min="1" max="1000" required aria-required="true">
+    <label for="compressionLevel" aria-label="Compression level">Compression Level:</label>
+    <select id="compressionLevel" aria-label="Compression level selector">
+      <option value="none">None</option>
+      <option value="low">Low</option>
+      <option value="high" selected>High</option>
+    </select>
+    <input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.zip,.pdf,.docx" aria-label="Select files to upload">
+    <div id="previewContainer" role="region" aria-label="File preview table">
+      <table id="previewTable">
+        <thead>
+          <tr><th>Preview</th><th>Name</th><th>Size (MB)</th><th>Type</th></tr>
+        </thead>
+        <tbody id="previewTableBody"></tbody>
+      </table>
+    </div>
+    <div id="fileList" role="region" aria-label="Selected files list"></div>
+    <button onclick="startConnection()" aria-label="Generate QR code for session">Generate QR Code</button>
+    <button onclick="reconnect()" aria-label="Reconnect to session">Reconnect</button>
+    <button onclick="sendFile()" aria-label="Send selected files">Send File</button>
+    <button onclick="cancelTransfer()" id="cancelButton" disabled aria-label="Cancel file transfer">Cancel Transfer</button>
+    <button onclick="clearHistory()" aria-label="Clear transfer history">Clear History</button>
+    <div id="spinner" class="spinner" aria-label="Loading"></div>
+    <progress id="progress" value="0" max="100" aria-label="File transfer progress"></progress>
+    <div id="qrCode" role="region" aria-label="QR code for session"></div>
+    <div id="connectionStatus" aria-label="Connection status"></div>
+    <div id="bandwidth" aria-label="Network bandwidth"></div>
+    <div id="analytics" aria-label="Transfer analytics"></div>
+    <div id="checksumStatus" aria-label="Checksum verification status"></div>
+    <div id="status" aria-label="Status messages"></div>
+    <div id="debugPanel" role="region" aria-label="Debug logs"></div>
+    <div id="transferHistory" role="region" aria-label="Transfer history">
+      <h3>Transfer History</h3>
+    </div>
+  </div>
+
+  <!-- SVG Icons -->
+  <svg style="display: none;">
+    <defs>
+      <symbol id="zipIcon" viewBox="0 0 24 24">
+        <path d="M21 7h-6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 4v16a1 1 0 0 0 1 1h6" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 21v-8H5" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="pdfIcon" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 13h-4v-1h4v1zm0 3h-4v-1h4v1zm-6-4H8v4h2v-4z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="docIcon" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 9H8v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="fallbackIcon" viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
