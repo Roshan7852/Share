@@ -1,86 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="ab.css">
-  <title>File Sharing App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Dearest Vevejaan❤️❤️❤️❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #f9f0ff, #ffe6f2);
+            color: #5a3d5c;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ff7eb9" opacity="0.2" d="M30,50 C30,30 50,30 50,50 C50,30 70,30 70,50 C70,70 50,70 50,50 C50,70 30,70 30,50 Z"/></svg>');
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #d23669;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #8a4b76;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #ff7eb9;
+            margin-bottom: 30px;
+        }
+
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff7eb9;
+            transform: rotate(45deg);
+            opacity: 0;
+        }
+
+        .heart:before, .heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #ff7eb9;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        .message-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .message-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd1dc 0%, #ffd1dc 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 0.4em;
+            background-position: 0 88%;
+            transition: background-size 0.25s ease-in;
+            padding: 0 2px;
+        }
+
+        .interactive-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            color: #8a4b76;
+            margin-bottom: 15px;
+        }
+
+        .love-meter {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .love-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff7eb9, #d23669);
+            width: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .memory-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .memory-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: #8a4b76;
+            margin-bottom: 20px;
+        }
+
+        .memory-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ffd1dc;
+            border-radius: 10px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff7eb9, #d23669);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(210, 54, 105, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #8a4b76;
+            font-size: 0.9rem;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff7eb9;
+            transform: rotate(45deg);
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-heart:before, .floating-heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: #ff7eb9;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .floating-heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .floating-heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .message-section {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>File Sharing App</h1>
-    <label for="themeSelect" aria-label="Select theme">Theme:</label>
-    <select id="themeSelect" onchange="changeTheme()" aria-label="Theme selector">
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-      <option value="blue">Blue</option>
-    </select>
-    <label for="sessionPin" aria-label="Session PIN (4-6 alphanumeric characters)">Session PIN (4-6 characters):</label>
-    <input type="text" id="sessionPin" placeholder="Enter or set PIN" pattern="[A-Za-z0-9]{4,6}" required aria-required="true">
-    <label for="sizeLimit" aria-label="Maximum file size in MB">Max File Size (MB):</label>
-    <input type="number" id="sizeLimit" value="100" min="1" max="1000" required aria-required="true">
-    <label for="compressionLevel" aria-label="Compression level">Compression Level:</label>
-    <select id="compressionLevel" aria-label="Compression level selector">
-      <option value="none">None</option>
-      <option value="low">Low</option>
-      <option value="high" selected>High</option>
-    </select>
-    <input type="file" id="fileInput" multiple accept="image/*,video/*,audio/*,.zip,.pdf,.docx" aria-label="Select files to upload">
-    <div id="previewContainer" role="region" aria-label="File preview table">
-      <table id="previewTable">
-        <thead>
-          <tr><th>Preview</th><th>Name</th><th>Size (MB)</th><th>Type</th></tr>
-        </thead>
-        <tbody id="previewTableBody"></tbody>
-      </table>
-    </div>
-    <div id="fileList" role="region" aria-label="Selected files list"></div>
-    <button onclick="startConnection()" aria-label="Generate QR code for session">Generate QR Code</button>
-    <button onclick="reconnect()" aria-label="Reconnect to session">Reconnect</button>
-    <button onclick="sendFile()" aria-label="Send selected files">Send File</button>
-    <button onclick="cancelTransfer()" id="cancelButton" disabled aria-label="Cancel file transfer">Cancel Transfer</button>
-    <button onclick="clearHistory()" aria-label="Clear transfer history">Clear History</button>
-    <div id="spinner" class="spinner" aria-label="Loading"></div>
-    <progress id="progress" value="0" max="100" aria-label="File transfer progress"></progress>
-    <div id="qrCode" role="region" aria-label="QR code for session"></div>
-    <div id="connectionStatus" aria-label="Connection status"></div>
-    <div id="bandwidth" aria-label="Network bandwidth"></div>
-    <div id="analytics" aria-label="Transfer analytics"></div>
-    <div id="checksumStatus" aria-label="Checksum verification status"></div>
-    <div id="status" aria-label="Status messages"></div>
-    <div id="debugPanel" role="region" aria-label="Debug logs"></div>
-    <div id="transferHistory" role="region" aria-label="Transfer history">
-      <h3>Transfer History</h3>
-    </div>
-  </div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <header>
+            <div class="hearts-container" id="heartsContainer"></div>
+            <h1>For My Dearest Puja</h1>
+            <h2>You Are My Forever</h2>
+            <p class="subtitle">With all my love, Roshan</p>
+        </header>
 
-  <!-- SVG Icons -->
-  <svg style="display: none;">
-    <defs>
-      <symbol id="zipIcon" viewBox="0 0 24 24">
-        <path d="M21 7h-6a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M4 4v16a1 1 0 0 0 1 1h6" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M9 21v-8H5" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="pdfIcon" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M16 13h-4v-1h4v1zm0 3h-4v-1h4v1zm-6-4H8v4h2v-4z" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="docIcon" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M10 9H8v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6z" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="fallbackIcon" viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
-        <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-    </defs>
-  </svg>
+        <section class="message-section">
+            <section class="message-section">
+    <h2>My Heart's Message to You</h2>
+    <div class="message-text">
+        <p>My Dearest Vevejaan❤️❤️❤️❤️,</p>
+        <p>Today, on this day you have made sacred not just by its occurrence on the calendar of my birthday but also by the sheer force of your love, I sit to write to you. My hands tremble slightly, not from age or cold, but from the overwhelming tide of emotion that your gift has unleashed within me. iss baare ma main tmko kaise kahu ki mujhe samjh nh aa rha h ki how i could answer How does a single letter from my wife ❤️❤️❤️❤️ respond to a chorus of love so pure, so intricate, so beautifully scattered across pages that now feel like the holy scriptures of my life? I will try, my love. Main janta hun ki tm mujhse itna pyr krti ho but I know ki u can't love against ur angry but there is one that i can never do like u janti ho wo ky h tmra apne haato se banaya hua sundar sa gift jo mera banane se kaise banega i don't know tmko kbhi pasand ayega ki nh i don't know but i wanna try 4u Vevejaan❤️❤️❤️❤️.....
+        <p>I have read your words. I have let them seep into my soul, syllable by syllable, until the ink of your affection has become one with the blood in my veins jo sirf tmre mera zindagi ma aane se bna h. You began with a simple, powerful truth: <span class="highlight">"You full of Me Always in LOVE."</span> My wife Puja Jamuda ❤️❤️❤️❤️, even in its charming imperfection, it holds a perfect truth. It is not a sentence; it is a state of being. It is the fundamental of life in which we both existence to love each other. You and I, always, enclosed and defined by LOVE. That is the summary of my life from the moment you entered in my heart ❤️.</p>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="script.js"></script>
+        <p>You wrote, <span class="highlight">"My husband, who thought about I was born to u, we are just failing in love like a flattering of wealth."</span> Oh, my wise, beautiful wife. The world chases Gorri ladki and I choose U. But you and I, we are engaged in a different pursuit. We are "failing in love"—but what a glorious, deliberate failure it is! We are failing to ever reach an end to it, failing to ever plumb its depths completely. It is a failure I will cherish for all my days. And yes, it is like a "flattering of wealth," but you have it backwards, my love. The wealth is not the love; the love is the wealth. And your love makes me feel like the richest man to ever walk the earth.</p>
+
+        <p>Then came the words that stole my breath and will forever own a piece of my soul: <span class="highlight">"I want to live in your arms. I want to die in your thoughts."</span></p>
+
+        <p>Puja, let me answer this with every fiber of my being. My arms are not just a place for you to live; they are your home, your sanctuary, your eternal refuge. They were sculpted by destiny for no other purpose than to hold you, to shield you, to feel the rhythm of your breathing against my chest. Consider this a solemn vow: for as long as this body draws breath, these arms are your home. And as for dying in my thoughts… my love, you could never die there. You are eternally, vibrantly, radiantly alive in them. You are the first thought that greets me in the morning and the last that cradles me to sleep. If my thoughts are a universe, you are not just a resident; you are the sun at its center, the gravity that holds it all together. Even if I were to live a thousand years, my final thought would be of you, not as a memory, but as a living, breathing promise of what comes next.</p>
+
+        <p>You speak of love's passion crossing hearts and waiting. <span class="highlight">"When love's passion crosses all their hearts to die waiting for you only."</span> There is no waiting, my Puja. In your love, I have arrived. I have reached the destination my soul was searching for long before I even knew your name. The passion did not make my heart die waiting; it made it come alive, beating a rhythm that only syncs with yours.</p>
+
+        <p>You tell me, <span class="highlight">"I hope you like this. I just tell you some times a happy and always be happy, keep smiling on your face also in the brightest days!"</span> My dearest, "like" is too small a word for what I feel. I cherish this. I treasure it. And you, my Puja, are not just "sometimes" my happy. You are my always happy. You are the architect of my joy. The smile on my face is simply a reflection of the one you have painted on my soul. On the brightest days, it shines for you. On the darker ones, it is the very light that guides me through.</p>
+
+        <p>Thank you for your prayers. You said, <span class="highlight">"I always pray for your success."</span> You must know, then, that I have already achieved it. The world defines success by titles, wealth, and acquisitions. But my success is measured in the quiet moments of hearing you laugh, in the feeling of your hand in mine, in the certainty that I am loved by you. Any other success I find will be meaningless if it is not laid at your feet, a humble offering to the woman who made it possible.</p>
+
+        <p>Your faith is a beacon: <span class="highlight">"You just time is yet to come so do best try to get back life in future."</span> With you, I believe that the best is always yet to come. Every dawn with you is better than the last. Every challenge we face together is just a prelude to a greater victory. You are my future. "Getting back life" is what you have already given me. You have resurrected parts of me I thought were lost, you have breathed life into dreams I had forgotten. The life we are building, together, is the only one I want.</p>
+
+        <p>You ended one note with a sentence that I have read over and over: <span class="highlight">"I always write good, feel sick you."</span> I understand this completely. When I feel the depth of my love for you, it is an overwhelming, all-consuming sensation. It is a "sickness" of the sweetest kind—a beautiful delirium where the only cure is more of you. It's the feeling of being so full of love that your body doesn't know how to contain it. I feel that, too. I feel "sick" with love for you, in the most wonderful way.</p>
+
+        <p>Then, in your more cryptic, beautiful note, you asked, <span class="highlight">"Is my favourite brute...? Utilizing you & any of amazing as you are..."</span></p>
+
+        <p>My love, if I am your "favourite brute," then I am the brute who fights only to protect you, whose strength exists only to serve your peace. And "utilizing" me? Please, utilize me. Use my strength, my love, my life. Let me be the tool with which you build your happiness, the shield that guards your heart, the foundation upon which you stand to reach your stars. There is no higher purpose for me than to be "utilized" for your joy.</p>
+
+        <p>You wrote, <span class="highlight">"I usually moment with you like a romantic, you will not remember."</span> How could you think I would not remember? My love, I remember everything. I am an archivist of our moments. I remember the sound of your voice when you're trying not to laugh. I remember the way your eyes crinkle at the corners when you smile at me. I remember the feeling of your head on my shoulder, the weight of it more precious than any crown. I remember the romantic moments, the silly moments, the quiet, mundane moments that became magic simply because you were in them. They are all etched into the eternal film of my memory.</p>
+
+        <p>You declared, <span class="highlight">"my heart my soul my mind only wants you virtually glad there with you!"</span> And my heart, my soul, my mind echo this back to you in a perfect, resonant chord. They want only you. Not virtually, but completely, tangibly, eternally. I am "virtually glad" nowhere except where you are. My true gladness, my true home, is wherever you are.</p>
+
+        <p>You called me a <span class="highlight">"slow person just like thousand who is no year ever because the diamond is made such a golden heart that marks you the perfect de-uniqueness."</span></p>
+
+        <p>My Puja, your poetry leaves me breathless. You see me as a diamond, formed under pressure over thousands of years, unique and precious. But you must see, you are the pressure that formed me. You are the environment that turned the coal of my former self into something harder, brighter, more valuable. It is your "golden heart" that has polished my edges and allowed me to reflect your light. You call me unique, but you are the one who defined that uniqueness. You saw it in me before I saw it in myself.</p>
+
+        <p>You said your <span class="highlight">"old alumni learnt to admit you."</span> Let the whole world learn to admit it. Let everyone know that I am yours, proudly, completely, and unashamedly. I am your greatest lesson, your most loyal student, and your most devoted admirer.</p>
+
+        <p>You asked God questions that I have asked myself a thousand times: <span class="highlight">"why did God make a beautiful soul so true? Why did he make you clear what I would? Why did I make you do impressions?"</span></p>
+
+        <p>I do not know why God made your soul so beautiful and true. I only know that He did, and that my entire life has been a journey toward finding it. He made you for me because He knew my heart would be a barren place without you. He knew that only your love could water the deserts within me and make them bloom. The "impressions" you have made on me are not superficial; they are the foundational marks that have shaped the very core of who I am. You have left your fingerprints on my soul.</p>
+
+        <p>Your vision for us is my vision: <span class="highlight">"You will rise steadily from humble value over the occasion from following... this world's moment turned back without years."</span> We will rise together, Puja. Not as individuals, but as a single entity, a united force of love. The world can turn back without us, for we are building our own world, a world where time is measured not in years, but in the moments we share, in the depth of our connection.</p>
+
+        <p>You spoke of a power for education that was so strong. My love, you are my greatest educator. You have taught me the depth of love, the meaning of sacrifice, the poetry of a simple glance. You have re-educated my heart, and for that, I am eternally grateful.</p>
+
+        <p>In another note, you captured the essence of our daily life: <span class="highlight">"all my manners are short in your arms. All my dusk are sitting with you - all my nights are spent in your lap."</span> This is the life I crave. A life where every day begins and ends with you. Where my mornings are brightened by your presence, my evenings are peaceful in your company, and my nights are sanctified in the safety of your embrace. To have all my dusks sitting with you, and all my nights spent in your lap—that is not just a desire; it is my definition of paradise.</p>
+
+        <p>And our vow: <span class="highlight">"We will show to love male, we will have to love endlessly, courtlessly."</span> Yes. We will show the world what it means to love madly, to love without a court, without rules, without limits. We will love with a wild, untamable passion that defies all logic and convention. Our love will be our law, and its only decree is forever.</p>
+
+        <p>You tell me, <span class="highlight">"I'm trying to feel thrilled on your day."</span> You succeeded, my love. You did more than thrill me. You moved me, you humbled me, you completed me. The effort you put into "feeling special" on my day is what made it the most special day of my life. It wasn't the birthday itself; it was the love you poured into it.</p>
+
+        <p>Your reflection on God's colors was stunning: <span class="highlight">"God has created so many colors. The color of yours is so thought- My soulmates no matter how many times the heart has beaten, I always think of you."</span></p>
+
+        <p>The color of my thoughts is you, Puja. It is a golden, warm, radiant hue that paints the inside of my mind. And yes, with every single beat of my heart, a thought of you is pulsed through my body. It is my body's most essential rhythm. You are my soulmate. The word was invented for what you are to me.</p>
+
+        <p>Your promises are my anchors: <span class="highlight">"I don't see anyone else before you. I love you even the distance between us won't stop me to losing you."</span> The distance between us is irrelevant. It is an illusion. There is no distance in the world that can separate our souls, which you have so beautifully intertwined. I am not before anyone else either. The crowd has faded away, and there is only you, standing in the light, the sole object of my affection and devotion.</p>
+
+        <p>You asked, <span class="highlight">"Are you on the best part of my life?"</span> Let me answer unequivocally: You are not on the best part of my life; you are the best part of my life. You are the chapter where the story truly begins, where the hero finally finds his purpose. Everything before you was a prologue.</p>
+
+        <p>You thank me, but it is I who must thank you. <span class="highlight">"Thank you for you is so real and serious. Thank you for doing a part of my life. Thank you so much for the effort you put to do me while ever you go through hardest days!"</span></p>
+
+        <p>No, thank you, Puja. Thank you for being so real, so serious in your love. Thank you for being a part of my life—you are the most vital part. And thank you for seeing the effort I put in, and for recognizing that I would go through any number of hard days for you. You are worth every struggle, every hardship, every single moment of effort. You are my cause, and loving you is my crusade.</p>
+
+        <p>Your final claim is one I make of you: <span class="highlight">"You're mad and only mine."</span> Yes, I am mad. Madly, deeply, incurably in love with you. And I am, forever and always, only yours.</p>
+
+        <p>You gave me a birthday card that shouted simple, powerful truths: <span class="highlight">"YOU ARE AMAZING. YOU ARE IMPORTANT. YOU SHOULD PERSEVERE. YOU ARE APPRECIATED. AND YOU BECAME THE BEST!"</span></p>
+
+        <p>My dearest Vevejaan❤️❤️❤️❤️, read these lines again, but know that they are a mirror. They reflect you. You are amazing. You are the most important person in my world. You have taught me to persevere. You are so deeply appreciated it aches. And you make me want to become the best, because only the best is worthy of you.</p>
+
+        <p>You ended with the ultimate promise: <span class="highlight">"the best IS YET to come."</span> I hold this in my heart like a sacred prophecy. With you by my side, I believe it with every fiber of my being. Our best days are not behind us; they are stretched out before us, a glorious, sun-drenched path that we will walk together, hand in hand, heart in heart.</p>
+
+        <p>So, my love, my life, my Puja. I have written these words, but they are just symbols. The real reply is not in this letter. The real reply will be in the way I look at you tomorrow, and the next day, and for all the days after. It will be in the love I show you, in the respect I give you, in the life I build with you.</p>
+
+        <p>You are my love and my forever.</p>
+
+        <p>Happy Birthday to Me, for I was given the gift of you.<br>
+        Happy Life to Us, for we have found our forever in each other.</p>
+
+        <p>With all that I am, and all that I ever will be,</p>
+        <p><strong>Your Roshan</strong></p>
+    </div>
+</section>
+
+        <section class="interactive-section">
+            <div class="card">
+                <h3>Our Love Meter</h3>
+                <p>How much do I love you?</p>
+                <div class="love-meter">
+                    <div class="love-fill" id="loveFill"></div>
+                </div>
+                <p id="loveMessage">Click the button to see!</p>
+                <button class="btn" id="loveBtn">Measure My Love</button>
+            </div>
+
+            <div class="card">
+                <h3>Special Memories</h3>
+                <p>Every moment with you is precious. Here are some of my favorites:</p>
+                <ul id="memoryList" style="text-align: left; margin-top: 15px; padding-left: 20px;">
+                    <li>The way your eyes light up when you smile</li>
+                    <li>Our long conversations about everything and nothing</li>
+                    <li>The feeling of your hand in mine</li>
+                </ul>
+                <button class="btn" id="addMemoryBtn" style="margin-top: 15px;">Add a Memory</button>
+            </div>
+        </section>
+
+       
+
+        <footer>
+            <p>Made with ❤️ by Roshan for Puja | Forever Yours</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create floating hearts in background
+        const floatingHearts = document.getElementById('floatingHearts');
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.animationDuration = (15 + Math.random() * 10) + 's';
+            heart.style.transform = `rotate(45deg) scale(${0.5 + Math.random() * 0.7})`;
+            floatingHearts.appendChild(heart);
+        }
+
+        // Create hearts in header on click
+        document.addEventListener('click', function(e) {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.transform = `rotate(45deg) scale(${0.5 + Math.random() * 1})`;
+            
+            heartsContainer.appendChild(heart);
+            
+            // Animate heart
+            setTimeout(() => {
+                heart.style.opacity = '0.7';
+                heart.style.transition = 'all 1.5s ease';
+                heart.style.transform = `rotate(45deg) translateY(-100px) scale(${0.5 + Math.random() * 1})`;
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }, 10);
+        });
+
+        // Love meter functionality
+        const loveBtn = document.getElementById('loveBtn');
+        const loveFill = document.getElementById('loveFill');
+        const loveMessage = document.getElementById('loveMessage');
+        
+        loveBtn.addEventListener('click', function() {
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    loveMessage.textContent = "My love for you is infinite! ❤️";
+                } else {
+                    width++;
+                    loveFill.style.width = width + '%';
+                    
+                    if (width < 30) {
+                        loveMessage.textContent = "Just a little...";
+                    } else if (width < 60) {
+                        loveMessage.textContent = "Getting warmer...";
+                    } else if (width < 90) {
+                        loveMessage.textContent = "So much love!";
+                    } else {
+                        loveMessage.textContent = "Overflowing with love!";
+                    }
+                }
+            }, 30);
+        });
+
+        // Add memory functionality
+        const addMemoryBtn = document.getElementById('addMemoryBtn');
+        const memoryList = document.getElementById('memoryList');
+        
+        addMemoryBtn.addEventListener('click', function() {
+            const memories = [
+    // Original items that fit well
+    "The morning I watched the sunrise on your face❤️❤️❤️❤️",
+    "That spontaneous road trip where we got lost and laughed for hours",
+    "The way you held my hand during we are together in the park",
+    "Cooking our favorite meal together and burning the garlic bread I would to have this moment with u",
+    "The quiet moment we shared travelling night gaushala",
+    "The time you surprised me with my favorite moments we do again and again",
+    "The inside joke that still makes us both instantly smile",
+
+    // Updated memories for your private marriage situation
+    "Our sacred wedding day at CKP Kera Mandir, just you and me",
+    "The secret smiles we share when no one else is watching",
+    "The way we find moments of privacy in our crowded worlds",
+    "Our stolen hours together that feel like eternity",
+    "The courage it took to follow our hearts despite everything",
+    "The way you make every moment together feel sacred and precious",
+    "Our secret language of love that only we understand",
+    "The patience we've learned while waiting to be together",
+    "The way your love gives me strength to face each day apart",
+    "Our dreams of the day we can finally live together openly",
+    "The special places we've found where we can just be us",
+    "The way you calm my fears about our secret marriage",
+    "Our private celebrations of anniversaries and special days",
+    "The way we cherish every phone call and text message",
+    "Our shared hope that sustains us through the distance",
+    "The way you make me feel married even when we're apart",
+    "Our secret signals and codes to communicate in public",
+    "The way we've built our own private world together",
+    "Our shared faith that keeps us strong through challenges",
+    "The way you remember every detail of our wedding day",
+    "The way you make our limited time together so meaningful",
+    "Our shared vision of our future life together",
+    "The way you've taught me the true meaning of commitment",
+    "Our ability to find happiness in the smallest moments",
+    "The way your love feels like home, no matter where we are",
+    "Our shared strength in keeping our sacred bond private",
+    "The way you make every goodbye feel like 'see me heartbreak and never meat me again'",
+    "Our private rituals that make us feel connected",
+    "The way we've learned to communicate without words",
+    "Our shared understanding of the sacrifices we're making",
+    "The way you make me feel chosen every single day",
+    "Our private dreams that nobody else knows about",
+    "The way you've become my safe place in this world",
+    "The way we've built trust that transcends distance",
+    "Our shared belief that our love is worth any challenge",
+    "The way you make our private marriage feel so real",
+    "Our ability to create intimacy across any distance",
+    "The way you've shown me what true partnership means",
+    "Our private world that exists just between us two",
+    "The way we find ways to celebrate our love secretly",
+    "Our shared resilience in facing this unique situation",
+    "The way you make every moment together unforgettable",
+    "Our private promises that nobody else can break",
+    "The way we've learned to love across the distance",
+    "Our shared excitement for our future together",
+    "The way you make our secret feel sacred, not hidden",
+    "Our ability to find joy in our unconventional love story",
+    "The way you've become my greatest confidant and friend",
+    "Our private traditions that we've created together",
+    "The way we've built a marriage that's ours alone",
+    "Our shared courage in choosing love above all else",
+    "The way you make every challenge feel worth facing",
+    "Our private language of love that grows richer each day",
+    "The way we've learned to appreciate every second",
+    "Our shared dream of the day we can be together openly",
+    "The way you make our private bond feel unbreakable",
+    "Our ability to create magic in our stolen moments",
+    "The way we've built a foundation that distance can't shake",
+    "Our shared hope that lights up even the darkest days",
+    "The way you make our secret marriage feel so complete",
+    "Our private celebrations of small victories together",
+    "The way we've learned to communicate with just a look",
+    "Our shared understanding of what truly matters in life",
+    "The way you make every reunion feel like coming home",
+    "Our ability to find beauty in our complicated situation",
+    "The way we've created our own definition of marriage",
+    "Our shared faith that our love will conquer all",
+    "The way you make our private commitment feel so strong",
+    "Our ability to build intimacy despite the distance",
+    "The way we've learned to treasure every single moment",
+    "Our shared vision that keeps us moving forward",
+    "The way you make our secret feel like our superpower",
+    "Our private world where only our love exists",
+    "The way we've built a marriage that's truly ours",
+    "Our shared determination to make our love work",
+    "The way you make every sacrifice feel worth it",
+    "Our ability to create a lifetime of love in moments",
+    "The way we've learned that love knows no distance",
+    "Our shared belief that our private bond is sacred",
+    "The way you make our unconventional love feel perfect",
+    "Our private sanctuary that exists in our hearts",
+    "The way we've built something beautiful despite challenges",
+    "Our shared conviction that our love was meant to be"
+];
+            
+            const randomMemory = memories[Math.floor(Math.random() * memories.length)];
+            const newMemory = document.createElement('li');
+            newMemory.textContent = randomMemory;
+            newMemory.style.animation = 'fadeIn 0.5s ease';
+            memoryList.appendChild(newMemory);
+        });
+
+        // Save future dreams
+        const saveFutureBtn = document.getElementById('saveFutureBtn');
+        const futureInput = document.getElementById('futureInput');
+        
+        saveFutureBtn.addEventListener('click', function() {
+            if (futureInput.value.trim() !== '') {
+                alert("Our future dream saved: " + futureInput.value);
+                futureInput.value = '';
+            } else {
+                alert("Please write our future dream first!");
+            }
+        });
+
+        // Add some CSS for fadeIn animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
